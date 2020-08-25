@@ -1,0 +1,40 @@
+﻿@page "{id}"
+@model RazorPagesUI.Pages.Employees.DetailsModel
+@{
+    ViewData["Title"] = "О сотруднике";
+    var PhotoPath = $"/images/{Model.Employee.PhotoPath ?? "noimage.png"}";
+}
+<h2 class="text-center">О сотруднике</h2>
+<div class="row justify-content-center" m-3>
+    <div class="col col-lg-8">
+        <div class="card cardBoxShadow">
+            <div class="card-header cardHeaderStyle">
+                <h1>@Model.Employee.Name</h1>
+            </div>
+            <div class="card-body cardBodyStyle text-center">
+                <div class="row">
+                    <div class="col col-lg-9">
+                        <h4 class="cardTextLeftFloating">Id:  @Model.Employee.Id</h4><hr />
+                        <h4 class="cardTextLeftFloating">E-mail:  @Model.Employee.Email</h4><hr />
+                        <h4 class="cardTextLeftFloating">Отдел: <span class="text-danger font-weight-bold">@Model.Employee.Department</span></h4><hr />
+                    </div>
+                    <div class="col col-lg-3">
+                        <div class="imgBorder">
+                            <img class="card-img-top imageThumbnail border border-primary imgBackground" src="@PhotoPath" alt="Avatar" asp-append-version="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card-footer text-center cardFooterBackground">
+                            <a asp-page="Employees" class="btn btn-success buttonShadow">Назад</a>
+                            <a asp-page="Employees" class="btn btn-primary buttonShadow">Редактировать</a>
+                            <a asp-page="Employees" class="btn btn-danger buttonShadow">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
