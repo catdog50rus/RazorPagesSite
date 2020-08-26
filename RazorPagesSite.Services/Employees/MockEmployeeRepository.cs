@@ -1,9 +1,5 @@
 ﻿using RazorPagesSite.Models.Models.Employess;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using RazorPagesSite.Models.Models;
-using RazorPagesSite.Services.Employees;
 using System.Linq;
 
 namespace RazorPagesSite.Services.Employees
@@ -14,6 +10,7 @@ namespace RazorPagesSite.Services.Employees
 
         public MockEmployeeRepository()
         {
+            //Тестовая БД
             _employeeList = new List<Employee>()
             {
                 new Employee()
