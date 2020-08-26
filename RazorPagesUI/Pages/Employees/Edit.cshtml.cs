@@ -16,7 +16,7 @@ namespace RazorPagesUI.Pages.Employees
 
         public Employee Employee { get; private set; }
 
-        [BindProperty]
+        [BindProperty] //Объявление свойства из формы
         public IFormFile Photo { get; set; }
 
         public EditModel(IEmployeeRepository employeeRepository, IWebHostEnvironment webHostEnvironment)
@@ -37,19 +37,29 @@ namespace RazorPagesUI.Pages.Employees
 
             if (Photo != null)
             {
+                //Если у сотрудника была фотография
+                //Удаляем ее
                 if (employee.PhotoPath != null)
                 {
                     string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", employee.PhotoPath);
                     System.IO.File.Delete(filePath);
                 }
-
-                employee.PhotoPath = GetPathUploadedFile();
+                //Добавление новой фотографии
+                //Копируем файл в БД
+                //Получаем путь к новому файлу
+                employee.PhotoPath = GetUploadedFilename();
             }
+            //Обновляем профиль сотрудника в БД
             Employee = _employeeRepository.Update(employee);
             return RedirectToPage("Employees");
         }
 
-        private string GetPathUploadedFile()
+        /// <summary>
+        /// Скопировать новый файл в БД
+        /// Вернуть имя нового файла
+        /// </summary>
+        /// <returns></returns>
+        private string GetUploadedFilename()
         {
             string result = null;
             if(Photo != null)
@@ -66,8 +76,6 @@ namespace RazorPagesUI.Pages.Employees
                 {
                     Photo.CopyTo(fs);
                 }
-
-
             }
             return result;
         }

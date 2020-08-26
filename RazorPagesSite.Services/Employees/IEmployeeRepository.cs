@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RazorPagesSite.Models.Models;
+﻿using System.Collections.Generic;
 using RazorPagesSite.Models.Models.Employess;
 
 namespace RazorPagesSite.Services.Employees

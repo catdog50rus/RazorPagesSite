@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RazorPagesSite.Models.Models.Employess
+﻿namespace RazorPagesSite.Models.Models.Employess
 {
+    /// <summary>
+    /// Модель сотрудника
+    /// </summary>
     public class Employee
     {
         public int Id { get; set; }

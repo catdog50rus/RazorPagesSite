@@ -4,8 +4,14 @@ using System.Linq;
 
 namespace RazorPagesSite.Services.Employees
 {
+    /// <summary>
+    /// Реализация временного репозитория
+    /// </summary>
     public class MockEmployeeRepository : IEmployeeRepository
     {
+        /// <summary>
+        /// Список сотрудников
+        /// </summary>
         private readonly List<Employee> _employeeList;
 
         public MockEmployeeRepository()
@@ -40,16 +46,30 @@ namespace RazorPagesSite.Services.Employees
             };
         }
 
+        /// <summary>
+        /// Получить список сотрудников
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Employee> GetAllEmployees()
         {
             return _employeeList;
         }
 
+        /// <summary>
+        /// Получить сотрудника по ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Employee GetEmployee(int id)
         {
             return _employeeList.FirstOrDefault(e => e.Id == id);
         }
 
+        /// <summary>
+        /// Обновить данные сотрудника
+        /// </summary>
+        /// <param name="updateEmployee"></param>
+        /// <returns></returns>
         public Employee Update(Employee updateEmployee)
         {
             Employee employee = _employeeList.FirstOrDefault(e => e.Id == updateEmployee.Id);
