@@ -4,6 +4,13 @@
     ViewData["Title"] = "Персонал компании";
 }
 
+@if(TempData["SeccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["SeccessMessage"]
+    </div>
+}
+
 <h1>@ViewData["Title"]</h1>
 <div class="row">
     @foreach (var item in Model.Employees)

@@ -19,6 +19,11 @@ namespace RazorPagesUI.Pages.Employees
         [BindProperty] //Объявление свойства из формы
         public IFormFile Photo { get; set; }
 
+        [BindProperty]
+        public bool Notify { get; set; }
+
+        public string Message { get; set; }
+
         public EditModel(IEmployeeRepository employeeRepository, IWebHostEnvironment webHostEnvironment)
         {
             _employeeRepository = employeeRepository;
@@ -51,7 +56,18 @@ namespace RazorPagesUI.Pages.Employees
             }
             //Обновляем профиль сотрудника в БД
             Employee = _employeeRepository.Update(employee);
+            TempData["SeccessMessage"] = $"Пользователь {Employee.Name} успешно обновлен!";
             return RedirectToPage("Employees");
+        }
+
+        public void OnPostNotification(int id)
+        {
+            if (Notify)
+                Message = "Оповещение подключено!";
+            else
+                Message = "оповещения отключено!";
+            Employee = _employeeRepository.GetEmployee(id);
+
         }
 
         /// <summary>
@@ -72,10 +88,8 @@ namespace RazorPagesUI.Pages.Employees
                 string filePath = Path.Combine(uploadsFolder, result);
 
                 //Копируем файл с фотографией на сервер
-                using (var fs = new FileStream(filePath, FileMode.Create))
-                {
-                    Photo.CopyTo(fs);
-                }
+                using var fs = new FileStream(filePath, FileMode.Create);
+                Photo.CopyTo(fs);
             }
             return result;
         }
